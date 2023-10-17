@@ -29,7 +29,7 @@ Mobile Web App Screenshot:
 
 ### Links
 
-- Live Site URL: [Netlify](...)
+- Live Site URL: [Netlify](https://app.netlify.com/sites/superb-hamster-34c5dc/overview)
 - Repo URL: [Github Repo]([https://github.com/rebcop/MovieGarden])
 
 ## My process
