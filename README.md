@@ -88,7 +88,56 @@ Mobile Web App Screenshot:
     }
     ```
     
-3. When trying to display similar elements on a page where only the content is changing, use HTML templates to easily recreate the elements and replace the content accordingly.
+3. When trying to display similar elements on a page where only the content is changing, use HTML templates to easily recreate the elements and replace the content accordingly along with .content.cloneNode(true) on the template element in the DOM.
+   ```HTML
+   <template id="movie-card-template">
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://image.tmdb.org/t/p/w500/b0Ej6fnXAP8fK75hlyi2jKqdhHz.jpg" class="card-img-top"
+                    alt="Movie Poster">
+                <div class="card-body">
+                    <h5>The Equalizer 3</h5>
+                    <p class="card-text">Robert McCall finds himself at home in Southern Italy but he discovers his
+                        friends are under the control of local crime bosses. As events turn deadly, McCall knows
+                        what he has to do: become his friends' protector by taking on the mafia.</p>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary">
+                        More Info
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+   ```
+
+    ```js
+    async function displayMovies() {
+    ...
+
+        for (let i = 0; i < movies.length; i++) {
+
+            let movie = movies[i];
+
+            // Get all the child elements to copy over as well when cloneNode(true), if false instead of true is used, then no child elements
+            let movieCard = moviePosterTemplate.content.cloneNode(true);
+
+            // Uses a CSS selector to get the element and reassign the value of the img src attribute
+            let movieImgElement = movieCard.querySelector('.card-img-top');
+            movieImgElement.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+
+            // Get the element holding the movie title and replace the text with the title of the movie
+            let movieTitleElement = movieCard.querySelector('.card-body > h5');
+            movieTitleElement.textContent = movie.title;
+
+            // Get the element holding the paragraph information and replace the text with the summary of movie
+            let movieParagraphElement = movieCard.querySelector('.card-text');
+            movieParagraphElement.textContent = movie.overview;
+
+            // Add the revised card to the page
+            movieListDiv.appendChild(movieCard);
+    } 
+    ```
 
 ### Useful resources
 
