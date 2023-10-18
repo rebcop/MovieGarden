@@ -62,7 +62,7 @@ Mobile Web App Screenshot:
     }
     ```
     
-2. Use a try...catch statement to control what happens if something goes wrong when implementing resources from 3rd-party sources. For example using the fetch API to access data about movies.
+2. Use a try...catch statement to control what happens if something goes wrong when implementing resources from 3rd-party sources. For example using the fetch API to access data about movies. If an error happens, the catch block can be coded to present the user with information about what happened and next possible actions with a great UI experience.
     ```js
     async function getMovies() {
 
