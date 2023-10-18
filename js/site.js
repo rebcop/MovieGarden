@@ -48,6 +48,30 @@ async function getMovie(movieId) {
 
 }
 
+async function getGenres() {
+
+    // attempt to run this code, used when incorporating information from other people so it doesn't break our code, not for your own code that you can control
+try {
+
+                    // waiting for asyncronous operation to go to a url and comes back with a response
+    let response = await fetch(`https://api.themoviedb.org/3/genre/movie/list`, {
+        headers: {
+            'Authorization': `Bearer ${API_KEY}`
+        }
+    });
+
+    // changes the string recieved back and parses it into JSON object which is a javascript object in javascript
+    let data = await response.json();
+
+    return data;
+
+    // if something goes wrong, run this backup code
+} catch (error) {
+    console.error(error);
+}
+
+}
+
 // Needs to wait for getMovies so have to use async in front of function
 async function displayMovies() {
 
@@ -97,24 +121,52 @@ async function showMovieDetails(clickedBtn) {
     // get the details of the movie with that ID from TMBD API
     let movieData = await getMovie(movieId);
 
-    // Modify Content in Headaer of Modal
-    let modalTitle = document.querySelector('#movieModal .modal-title');
+    // Modify Img on Modal
+    let movieImg = document.querySelector('#movieModal .movie-image');
+    movieImg.src = `https://image.tmdb.org/t/p/w500${movieData.poster_path}`
+
+    // Modify Title on Modal
+    let modalTitle = document.querySelector('#movieModal .movie-title');
     modalTitle.textContent = movieData.title;
 
+    // Modify Tagline on Modal
     let modalTagline = document.querySelector('#movieModal .tagline');
-    modalTagline.textContent = `TAGLINE: ${movieData.tagline}`;
+    modalTagline.textContent = `${movieData.tagline}`;
 
-    // Modify Content in Body of Modal
-    let modalBody = document.querySelector('#movieModal .modal-body');
+    // Display genres on page
+    displayGenres(movieData.genres);
+
+    // Modify overview summary of Modal
+    let modalBody = document.querySelector('#movieModal .overview');
     modalBody.textContent = movieData.overview;
         
-    // Modify Content in Footer of Modal
-    let modalFooter = document.querySelector('#movieModal .modal-footer');
-
+    // Modify homepage website button links to on Modal
     let moviePageBtn = document.querySelector('#movieModal .btn-primary');
     moviePageBtn.href = movieData.homepage;
 
     // WANT: collection(maybe after), genres[], original_language, popularity, poster_path
     // release date, runtime, vote avg, vote count
+
+}
+
+// Add genre badges to genre div on page with all Genres associated with movie
+async function displayGenres(movieGenreArray) {
+
+    // // Grabs genre list from TMDB to assign colors to each genre
+    let genreData = await getGenres();
+
+    // Get div element to hold genre badges
+    const genreDiv = document.getElementById('genres');
+    genreDiv.textContent = '';
+
+    // loop through each item in array and add element to div element
+    for (let i = 0; i < movieGenreArray.length; i++) {
+
+        let badge = document.createElement('span');
+        badge.classList.add('badge','text-bg-success', 'mx-1');
+        badge.textContent = movieGenreArray[i].name;
+        genreDiv.appendChild(badge);
+
+    }
 
 }

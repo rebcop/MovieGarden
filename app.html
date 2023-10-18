@@ -19,6 +19,7 @@
     <!-- Custom CSS -->
     <link href="/css/site.css" rel="stylesheet" />
     <link href="/css/themes.css" rel=stylesheet />
+    <link href="/css/movieModal.css" rel="stylesheet" />
 
 
     <!-- Favicon -->
@@ -74,7 +75,7 @@
 
     <main class="container-xl py-3">
 
-        <h1 class="text-center my-3 display-3">Popular Movies</h1>
+        <h2 class="text-center my-3 display-3">Popular Movies</h2>
         <button class="btn btn-primary mb-5" onclick="displayMovies()">Get Movies</button>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center"
@@ -112,8 +113,8 @@
                 <img src="https://image.tmdb.org/t/p/w500/b0Ej6fnXAP8fK75hlyi2jKqdhHz.jpg" class="card-img-top"
                     alt="Movie Poster">
                 <div class="card-body">
-                    <h5>The Equalizer 3</h5>
-                    <p class="card-text">Robert McCall finds himself at home in Southern Italy but he discovers his
+                    <h5 class="text-truncate">The Equalizer 3</h5>
+                    <p class="card-text line-clamp">Robert McCall finds himself at home in Southern Italy but he discovers his
                         friends are under the control of local crime bosses. As events turn deadly, McCall knows
                         what he has to do: become his friends' protector by taking on the mafia.</p>
                 </div>
@@ -132,26 +133,46 @@
     <!-- Modal which shows more info about the movie -->
 
     <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <h1 class="modal-title fs-5" id="movieModalLabel">Modal title</h1>
-                        <h5 class="tagline lead"></h5>
+
+                <div class="position-absolute z-3 col-12 text-end">
+                    <button type="button" class="btn-close m-3 bg-success-subtle" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="row g-0">
+
+
+                    <div class="col-12 col-lg-4 movie-header">
+
+                            <img src="" class="movie-image" />
+
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="" type="button" class="btn btn-primary">Checkout Movie Page</a>
+                    <div class="col-12 col-lg-8 movie-body">
+                        <div class="p-3 h-100 d-flex flex-column">
+                            <h1 class="movie-title me-4">Movie Title</h1>
+                            <h3 class="tagline lead">Tagline</h3>
+                            <div id="genres" class="my-2">
+                                <!-- Genres of Movie Goes Here -->
+                            </div>
+                            <h6>Overview</h6>
+                            <p class="overview flex-grow-1">
+                                Overview
+                            </p>
+                            <div class="stats">
+
+                            </div>
+                            <div class="text-end">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <a href="" type="button" class="btn btn-primary">Checkout Movie Page</a>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

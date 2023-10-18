@@ -49,6 +49,14 @@ h4 {
     padding: 0rem 1rem;
 }
 
+h5 {
+
+    background-color: var(--rc-theme-200);
+    color: var(--rc-theme-800);
+    text-transform: uppercase;
+    padding: .5rem;
+}
+
 p {
     padding: 0rem 1rem;
 }
