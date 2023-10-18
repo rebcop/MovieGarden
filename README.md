@@ -1,8 +1,6 @@
 # MovieGarden - A Coding Challenge
 
-...
-Checkout FizzBuzz like you've never seen before in Blossom Buds!
-See the Buds Blossom! Display the numbers 1-100. If a number is divisible by the Blossom Value, a Blossom will be displayed. If a number is divisible by the Buds value, "Buds" will be displayed. If a number is divisible by both values, you'll see "Buds" Blossom!
+A web app that dynamically displays the most popular movies using the TMDB API.
 
 ## Table of contents
 
@@ -29,7 +27,7 @@ Mobile Web App Screenshot:
 
 ### Links
 
-- Live Site URL: [Netlify](https://app.netlify.com/sites/superb-hamster-34c5dc/overview)
+- Live Site URL: [Netlify](https://superb-hamster-34c5dc.netlify.app/)
 - Repo URL: [Github Repo]([https://github.com/rebcop/MovieGarden])
 
 ## My process
