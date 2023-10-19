@@ -1,6 +1,6 @@
 const API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZjQyMmQ4ZTc3YTczYTU2ZWJjNjBhYTliZjBkNjdjNiIsInN1YiI6IjY1MmVlMTg5YTgwMjM2MDBlMGFjNzg3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cujIti81xy50tbwjxfJiN5xOsCAg2HsLfueUwYFJlCI";
 
-// Calls the API and gets the movies, async tells it to wait 
+// Calls the API and gets the movies, async tells it to wait, returns movie array
 async function getMovies() {
 
     // attempt to run this code, used when incorporating information from other people so it doesn't break our code, not for your own code that you can control
@@ -20,10 +20,18 @@ async function getMovies() {
 
         // if something goes wrong, run this backup code
     } catch (error) {
-        console.error(error);
+        swal.fire({
+            icon: 'error',
+            backdrop: false,
+            title: 'Oops!',
+            text: 'Something went wrong reaching the TMBD API.'
+        })
+
+        // say return false or zero and then grab that value if something went wrong in the other functions
     }
 }
 
+// Calls the API and gets information for the one movie
 async function getMovie(movieId) {
 
         // attempt to run this code, used when incorporating information from other people so it doesn't break our code, not for your own code that you can control
@@ -43,7 +51,12 @@ async function getMovie(movieId) {
 
         // if something goes wrong, run this backup code
     } catch (error) {
-        console.error(error);
+        swal.fire({
+            icon: 'error',
+            backdrop: false,
+            title: 'Oops!',
+            text: 'Something went wrong reaching the TMBD API.'
+        })
     }
 
 }
@@ -111,10 +124,13 @@ function displayMovies(movies) {
 // Needs to wait for getMovies so have to use async in front of function
 async function displayAllMovies() {
 
-        let movies = await getMovies();
+    // put if return from error is a certain value do something like try again or show error image
+    // if (data == undefined || status_code )
 
-        displayMovies(movies);
-        
+    let movies = await getMovies();
+
+    displayMovies(movies);
+    
 }
 
 async function showMovieDetails(clickedBtn) {

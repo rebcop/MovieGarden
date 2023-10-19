@@ -29,7 +29,7 @@
 
 <!-- CHANGE THEME ACCORDINGLY TO LOGO -->
 
-<body data-rc-theme="green">
+<body data-rc-theme="green" onload="displayAllMovies()">
 
     <!-- #region navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -76,13 +76,13 @@
     <main class="container-xl py-3">
 
         <h2 class="text-center my-3 display-3">Popular Movies</h2>
-        <button class="btn btn-primary mb-5" onclick="displayAllMovies()">Get Movies</button>
+
 
         <div class="row g-2">
-            
+
             <div class="col-2 p-2 ">
                 <h5 class="text-center text-md-start"><i class="bi bi-funnel-fill"></i><span class="d-none d-md-inline">
-                    Genre</span></h5>
+                        Genre</span></h5>
                 <div class="overflow-x-hidden overflow-y-auto h-50-vh">
                     <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
                         data-genreId="28" onClick="filterByGenre(this)">
