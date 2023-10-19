@@ -76,12 +76,127 @@
     <main class="container-xl py-3">
 
         <h2 class="text-center my-3 display-3">Popular Movies</h2>
-        <button class="btn btn-primary mb-5" onclick="displayMovies()">Get Movies</button>
+        <button class="btn btn-primary mb-5" onclick="displayAllMovies()">Get Movies</button>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center"
-            id="movie-list">
-            <!-- Movie cards go here -->
+        <div class="row g-2">
+            
+            <div class="col-2 p-2 ">
+                <h5 class="text-center text-md-start"><i class="bi bi-funnel-fill"></i><span class="d-none d-md-inline">
+                    Genre</span></h5>
+                <div class="overflow-x-hidden overflow-y-auto h-50-vh">
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="28" onClick="filterByGenre(this)">
+                        <small><i class="fa-solid fa-person-running"></i><span class="d-none d-md-inline">
+                                Action</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="12" onClick="filterByGenre(this)">
+                        <small><i class="fa-solid fa-compass"></i><span class="d-none d-md-inline">
+                                Adventure</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="16" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-forward"></i><span class="d-none d-md-inline">
+                                Animation</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="35" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-face-grin-squint-tears"></i><span
+                                class="d-none d-md-inline">
+                                Comedy</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="80" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-gun"></i><span class="d-none d-md-inline">
+                                Crime</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="99" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-book"></i><span class="d-none d-md-inline">
+                                Documentary</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="18" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-masks-theater"></i><span
+                                class="d-none d-md-inline">
+                                Drama</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="10751" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-people-roof"></i><span
+                                class="d-none d-md-inline">
+                                Family</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="14" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-dragon"></i><span class="d-none d-md-inline">
+                                Fantasy</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="36" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-landmark"></i><span class="d-none d-md-inline">
+                                History</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="27" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-ghost"></i><span class="d-none d-md-inline">
+                                Horror</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="10402" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-music"></i><span class="d-none d-md-inline">
+                                Music</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="9648" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-magnifying-glass"></i><span
+                                class="d-none d-md-inline">
+                                Mystery</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="10749" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-heart"></i><span class="d-none d-md-inline">
+                                Romance</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="878" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-hand-spock"></i><span
+                                class="d-none d-md-inline">
+                                Science Fiction</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="10770" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-tv"></i><span class="d-none d-md-inline">
+                                TV Movie</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="53" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-forward"></i><span class="d-none d-md-inline">
+                                Thriller</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="10752" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-person-military-rifle"></i><span
+                                class="d-none d-md-inline">
+                                War</span></small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success border-0 w-100 text-center text-md-start"
+                        data-genreId="37" onClick="filterByGenre(this)">
+                        <small class="text-nowrap"><i class="fa-solid fa-hat-cowboy"></i><span
+                                class="d-none d-md-inline">
+                                Western</span></small>
+                    </button>
+                </div>
+
+            </div>
+            <div class="col-10">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center"
+                    id="movie-list">
+                    <!-- Movie cards go here -->
+                </div>
+            </div>
         </div>
+
 
 
     </main>
@@ -114,7 +229,8 @@
                     alt="Movie Poster">
                 <div class="card-body">
                     <h5 class="text-truncate">The Equalizer 3</h5>
-                    <p class="card-text line-clamp">Robert McCall finds himself at home in Southern Italy but he discovers his
+                    <p class="card-text line-clamp">Robert McCall finds himself at home in Southern Italy but he
+                        discovers his
                         friends are under the control of local crime bosses. As events turn deadly, McCall knows
                         what he has to do: become his friends' protector by taking on the mafia.</p>
                 </div>
@@ -135,18 +251,13 @@
     <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-
                 <div class="position-absolute z-3 col-12 text-end">
-                    <button type="button" class="btn-close m-3 bg-success-subtle" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close m-3 bg-success-subtle" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
-
                 <div class="row g-0">
-
-
                     <div class="col-12 col-lg-4 movie-header">
-
-                            <img src="" class="movie-image" />
-
+                        <img src="" class="movie-image" />
                     </div>
                     <div class="col-12 col-lg-8 movie-body">
                         <div class="p-3 h-100 d-flex flex-column">
@@ -156,11 +267,28 @@
                                 <!-- Genres of Movie Goes Here -->
                             </div>
                             <h6>Overview</h6>
-                            <p class="overview flex-grow-1">
+                            <p class="overview">
                                 Overview
                             </p>
-                            <div class="stats">
-
+                            <div class="stats small d-flex g-4 flex-grow-1 mb-3">
+                                <div>
+                                    <i class="bi bi-calendar-event" data-bs-custom-class="custom-tooltip"
+                                        data-bs-toggle="tooltip" title="Release Date"></i>
+                                    <span id="releaseDate">
+                                        <span id="month">08</span>/<span id="day">30</span>/<span id="year">2023</span>
+                                    </span>
+                                </div>
+                                <div>
+                                    <i class="bi bi-hourglass-split" data-bs-custom-class="custom-tooltip"
+                                        data-bs-toggle="tooltip" title="Runtime"></i>
+                                    <span id="runtime">60</span>min
+                                </div>
+                                <div>
+                                    <i class="bi bi-star-fill" data-bs-custom-class="custom-tooltip"
+                                        data-bs-toggle="tooltip" title="User Rating"></i>
+                                    <span id="voteAvg">5.3</span><span>/10 • </span>
+                                    <span id="voteCount">912</span>
+                                </div>
                             </div>
                             <div class="text-end">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -178,6 +306,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+
+    <!-- Bootstrap Tooltip -->
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+
+    <!-- Font Awesome Icons-->
+    <script src="https://kit.fontawesome.com/253b33a254.js" crossorigin="anonymous"></script>
 
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

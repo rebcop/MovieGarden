@@ -29,3 +29,39 @@ body #movieModal .modal-content{
     line-clamp: 3;
     overflow: hidden;
 }
+
+#movieModal i {
+    color: var(--rc-theme-600);
+
+}
+
+.stats div {
+    padding: 0 .5rem;
+}
+
+
+@media (min-width: 576px) {
+
+}
+
+
+@media (min-width: 768px) {
+
+}
+
+
+@media (min-width: 992px) {
+    .movie-image {
+        height: 100%;
+    }
+}
+
+
+@media (min-width: 1200px) {
+
+}
+
+
+@media (min-width: 1400px) {
+
+}
