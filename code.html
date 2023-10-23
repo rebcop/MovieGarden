@@ -81,29 +81,283 @@
             <div class="col-12 col-lg-8">
                 <pre class="line-numbers">
                     <code class="language-js">
-function displayMessage() {
-    // get the text out of our input and assign it to a variable
-    let msg = document.getElementById('message').value;
+                        const API_KEY = "SECRET";
 
-    Swal.fire(
-        {
-            backdrop: false,
-            title: 'Movie Garden',
-            text: msg, // <-- replace this text with that variable
-        }
-    );
-}
+                        // Calls the API and gets the movies, async tells it to wait, returns movie array
+                        async function getMovies() {
+                        
+                            // attempt to get all the popular movies through API
+                            try {
+                                let response = await fetch('https://api.themoviedb.org/3/movie/popular', {
+                                    headers: {
+                                        'Authorization': `Bearer ${API_KEY}`
+                                    }
+                                });
+                        
+                                // changes the string recieved back and parses it into an object
+                                let data = await response.json();
+                        
+                                return data.results;
+                        
+                            // if something goes wrong, show error alert
+                            } catch (error) {
+                                swal.fire({
+                                    icon: 'error',
+                                    backdrop: false,
+                                    title: 'Oops!',
+                                    text: 'Something went wrong reaching the TMBD API.'
+                                })
+                            }
+                        }
+                        
+                        // Calls the API and gets information for the one movie
+                        async function getMovie(movieId) {
+                        
+                            // Attempt to get movie details through API
+                            try {
+                                let response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}`, {
+                                    headers: {
+                                        'Authorization': `Bearer ${API_KEY}`
+                                    }
+                                });
+                        
+                                // changes the string recieved back and parses it into an object
+                                let data = await response.json();
+                        
+                                return data;
+                        
+                            // if something goes wrong, show error alert
+                            } catch (error) {
+                                swal.fire({
+                                    icon: 'error',
+                                    backdrop: false,
+                                    title: 'Oops!',
+                                    text: 'Something went wrong reaching the TMBD API.'
+                                })
+                            }
+                        }
+
+                        // Shows all the movie cards on the page
+                        function displayMovies(movies) {
+
+                            // Get the div that the movie cards will be placed into
+                            const movieListDiv = document.getElementById('movie-list');
+
+                            // Initialize the DIV, make sure it's empty
+                            movieListDiv.textContent = '';
+
+                            // Get the template for the movie cards
+                            const moviePosterTemplate = document.getElementById('movie-card-template');
+                        
+                            // Create the movie card from the template for each movie returned in the list
+                            for (let i = 0; i &lt; movies.length; i++) {
+                        
+                                let movie = movies[i];
+                        
+                                // Copy everything in template tags
+                                let movieCard = moviePosterTemplate.content.cloneNode(true);
+                        
+                                // Uses a CSS selector to get the element and reassign the value of the img src attribute
+                                let movieImgElement = movieCard.querySelector('.card-img-top');
+                                movieImgElement.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        
+                                // Get the element holding the movie title and replace the text with the title of the movie
+                                let movieTitleElement = movieCard.querySelector('.card-body > h5');
+                                movieTitleElement.textContent = movie.title;
+                        
+                                // Get the element holding the paragraph information and replace the text with the summary of movie
+                                let movieParagraphElement = movieCard.querySelector('.card-text');
+                                movieParagraphElement.textContent = movie.overview;
+                        
+                                // Make up own attribute to assign movie id to access this information later for the modal
+                                let movieButton = movieCard.querySelector('.btn-primary');
+                                movieButton.setAttribute('data-movieId', movie.id);
+                        
+                                // Add the movie card to the page
+                                movieListDiv.appendChild(movieCard);
+                            } 
+                        
+                        }
+                        
+                        // Get the list of movies with no filter and put them on the page
+                        async function displayAllMovies() {
+                        
+                            let movies = await getMovies();
+                            displayMovies(movies);
+                            
+                        }
+                        
+                        // Put the movie details in the modal when "More Info" button is pressed
+                        async function showMovieDetails(clickedBtn) {
+                        
+                            // get the ID of the movie that was clicked
+                            let movieId = clickedBtn.getAttribute('data-movieId');
+                        
+                            // get the details of the movie with that ID from TMBD API
+                            let movieData = await getMovie(movieId);
+                        
+                            // Modify Img on Modal
+                           let movieImg = document.querySelector('#movieModal .movie-image');
+                           movieImg.src = `https://image.tmdb.org/t/p/w500${movieData.poster_path}`
+                        
+                           // Modify Title on Modal
+                           let modalTitle = document.querySelector('#movieModal .movie-title');
+                           modalTitle.textContent = movieData.title;
+                        
+                           // Modify Tagline on Modal
+                           let modalTagline = document.querySelector('#movieModal .tagline');
+                           modalTagline.textContent = `${movieData.tagline}`;
+                        
+                           // Display genres on page
+                           displayGenres(movieData.genres);
+                        
+                           // Modify overview summary of Modal
+                           let modalBody = document.querySelector('#movieModal .overview');
+                           modalBody.textContent = movieData.overview;
+                               
+                           // Modify homepage website button links to on Modal
+                           let moviePageBtn = document.querySelector('#movieModal .btn-primary');
+                           moviePageBtn.href = movieData.homepage;
+                        
+                           // Modify Release Date
+                           let releaseDateMonth = document.getElementById('month');
+                           releaseDateMonth.textContent = movieData.release_date.slice(5,7);
+                        
+                           let releaseDateDay = document.getElementById('day');
+                           releaseDateDay.textContent = movieData.release_date.slice(8,10);
+                        
+                           let releaseDateYear = document.getElementById('year');
+                           releaseDateYear.textContent = movieData.release_date.slice(0,4);
+                        
+                           // Modify Runtime
+                           let runtime = document.getElementById('runtime');
+                           runtime.textContent = movieData.runtime;
+                        
+                           // Modify Voter average
+                           let voteAvg = document.getElementById('voteAvg');
+                           voteAvg.textContent = (movieData.vote_average).toFixed(2);
+                        
+                           // Modify Voter count
+                           let voteCount = document.getElementById('voteCount');
+                           voteCount.textContent = movieData.vote_count;
+                        }
+                        
+                        // Add genre badges to genre div on page with all Genres associated with movie
+                        function displayGenres(movieGenreArray) {
+                        
+                            // Get div element to hold genre badges
+                            const genreDiv = document.getElementById('genres');
+                            genreDiv.textContent = '';
+                        
+                            // loop through each item in array and add genre element to div element
+                            for (let i = 0; i &lt; movieGenreArray.length; i++) {
+                        
+                                let badge = document.createElement('span');
+                                badge.classList.add('badge','text-bg-success','mx-1');
+                                badge.textContent = movieGenreArray[i].name;
+                                genreDiv.appendChild(badge);
+                            }
+                        }
+                        
+                        // Filter the movies displayed when the particular genre button is clicked
+                        async function filterByGenre(filterBtn) {
+                        
+                            // Get the genre ID of the btn filter that was clicked
+                            let genreId = parseInt(filterBtn.getAttribute('data-genreId'));
+                        
+                            // Grab the movies Array from the database
+                            let movies = await getMovies();
+                        
+                            // Declare new array to put the filtered movies into
+                            let filteredMovies = [];
+                        
+                            // For movies that equal the genre id, put it into new movie array
+                            for (let i = 0; i &lt; movies.length; i++) {
+                        
+                                // Get genres for movie
+                                let movieGenreIds = movies[i].genre_ids;
+                        
+                                // Add movie to new array if it has genre id
+                                if ( movieGenreIds.includes(genreId) ) {
+                                    filteredMovies.push(movies[i]);
+                                }
+                            }
+                        
+                            // Display movies based on new filtered array
+                            displayMovies(filteredMovies);
+                        }
                     </code>
                 </pre>
             </div>
             <div class="col-12 col-lg-4">
-                <!-- Explain your code here! This is the trick, this is what I learned,
-                this is how it functions -->
-                <p>The code is structured in one function</p>
+                <h4>TL;DR</h4>
                 <p>
-                    <code>displayMessage</code> displays a sweetalert
-                    when the button is pressed.
+                    In order to grab data from a 3rd-party <span>API</span>, use the <code>fetch</code> method in a
+                    <span>try...catch block</span>
+                    so that the app can gracefully inform the user of an issue if there is one trying to access the
+                    data. This needs to go inside an
+                    <code>async function</code> with the <code>await</code> keyword proceeding <code>fetch</code> since
+                    it takes awhile (comparatively)
+                    to grab the full data from the <span>API</span> and return it.
                 </p>
+                <h4>Code Explanation</h4>
+                <p>Movie Garden was created with the following functions.</p>
+                <p>
+                    <code>getMovies</code>
+                </p>
+                <p>
+                    <code>getMovie</code>
+                </p>
+                <p>
+                    <code>displayMovies</code>
+                </p>
+                <p>
+                    <code>displayAllMovies</code>
+                </p>
+                <p>
+                    <code>showMovieDetails</code>
+                </p>
+                <p>
+                    <code>displayGenres</code>
+                </p>
+                <p>
+                    <code>filterByGenre</code>
+                </p>
+
+                <h4>What I learned</h4>
+                <ul>
+                    <li>There are functions that take awhile to run. These require the <code>await</code> keyword to be
+                        placed before
+                        it. If an <code>await</code> keyword is required it needs to be inside an
+                        <code>async function</code>. The <code>await</code> keyword
+                        allows for the following function to finish doing its job before continuing with the rest of the
+                        <code>async function</code>. For example when used with <code>fetch</code> to get data from an
+                        <span>API</span>.
+                    </li>
+                    <li>Use a <span>try...catch statement</span> to control what happens if something goes wrong when
+                        implementing
+                        resources from 3rd-party sources. For example using <code>fetch</code> to access data from an
+                        <span>API</span> about movies.
+                        If an error happens, the <span>catch block</span> can be coded to present the user with
+                        information about
+                        what happened and next possible actions with a great <span>UI</span> experience.
+                    </li>
+                    <li>
+                        When trying to display similar elements on a page where only the content is changing, use
+                        <span>HTML
+                            templates</span> to easily recreate the elements and replace the content accordingly along
+                        with
+                        <code>.content.cloneNode(true)</code> on the template element in the DOM.
+                    </li>
+                </ul>
+
+                <h4>Improvements</h4>
+                <ul>
+                    <li>Make sidebar sticky.</li>
+                    <li>Add also "Now Playing", "Top Rated", "Upcoming", "Trending" movie lists.</li>
+                    <li>A feature where a user can come to visit the page and their favorite movies can be saved to a
+                        list that is stored in the <span>local storage</span>.</li>
+                </ul>
             </div>
         </div>
     </main>

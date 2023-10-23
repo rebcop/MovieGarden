@@ -103,11 +103,6 @@ footer .bi:hover {
     color: var(--rc-theme-400);
 }
 
-.app-logo {
-    width: 100%;
-    max-width: 400px;
-}
-
 .custom-tooltip {
     --bs-tooltip-bg: var(--rc-theme-600);
     --bs-tooltip-color: var(--bs-white);
