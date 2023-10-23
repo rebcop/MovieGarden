@@ -11,6 +11,7 @@ A web app that dynamically displays the most popular movies using the TMDB API.
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
+  - [Possible Improvements](#possible-improvements)
   - [Useful resources](#useful-resources)
 - [Author](#author)
 
@@ -19,11 +20,11 @@ A web app that dynamically displays the most popular movies using the TMDB API.
 ### Screenshot
 
 Desktop Web App Screenshot:
-![Desktop Screenshot](./img/...t.png)
+![Desktop Screenshot](./img/desktop-screenshot.png)
 
 Mobile Web App Screenshot:
 <br/>
-<img src="./img/....JPG" alt="Mobile Screenshot" width="25%" height="auto">
+<img src="./img/iphone-screenshot.JPG" alt="Mobile Screenshot" width="25%" height="auto">
 
 ### Links
 
@@ -138,6 +139,12 @@ Mobile Web App Screenshot:
             movieListDiv.appendChild(movieCard);
     } 
     ```
+### Possible Improvements
+1. Make sidebar sticky.
+
+2. Add also "Now Playing", "Top Rated", "Upcoming", "Trending" movie lists.
+
+3. A feature where a user can come to visit the page and their favorite movies can be saved to a list that is stored in the local storage.
 
 ### Useful resources
 
