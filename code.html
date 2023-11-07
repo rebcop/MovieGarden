@@ -67,7 +67,7 @@
                         <!-- CHANGE ME TO THE DEPLOYED BLOG PROJECT -->
                         <!-- NOTE: it would be a great idea to write a blog and
                         link here -->
-                        <a class="nav-link" href="" target="_blank">Blog</a>
+                        <a class="nav-link d-none" href="" target="_blank">Blog</a>
                     </li>
                 </ul>
             </div>
@@ -292,36 +292,73 @@
             <div class="col-12 col-lg-4">
                 <h4>TL;DR</h4>
                 <p>
-                    In order to grab data from a 3rd-party <span>API</span>, use the <code>fetch</code> method in a
-                    <span>try...catch block</span>
+                    In order to grab data with a 3rd-party <span>API</span>, use the <code>fetch</code> method in a
+                    <span>try...catch statement</span>
                     so that the app can gracefully inform the user of an issue if there is one trying to access the
                     data. This needs to go inside an
                     <code>async function</code> with the <code>await</code> keyword proceeding <code>fetch</code> since
                     it takes awhile (comparatively)
-                    to grab the full data from the <span>API</span> and return it.
+                    to grab the data from the <span>API</span> and return it.
                 </p>
                 <h4>Code Explanation</h4>
                 <p>Movie Garden was created with the following functions.</p>
                 <p>
-                    <code>getMovies</code>
+                    <code>getMovies</code> grabs data about the most popular movies from "The Movide DB" (TMDB) using
+                    their <span>API</span>
+                    with the <code>fetch</code> method in a <span>try...catch statement</span>. With the
+                    <span>try...catch statement</span>
+                    the app can gracefully inform the user of an issue if there is one trying to access the data
+                    instead of just breaking. In this case it'll show a <span>sweet alert</span>. This needs to go
+                    inside an
+                    <code>async function</code> with the <code>await</code> keyword proceeding <code>fetch</code>
+                    since it takes awhile (comparatively) to grab the data from the API and return it.
+
                 </p>
                 <p>
-                    <code>getMovie</code>
+                    <code>getMovie</code> is similar to <code>getMovies</code> except instead of using the
+                    <span>API</span> to get data for the most popular movies,
+                    it uses the <span>API</span> to get detailed data for one movie. The one movie is identified with
+                    the <code>movieId</code> which is a <span>parameter</span>
+                    for this <span>function</span> and used in the <span>API</span> call using <span>string
+                        interpolation</span>.
                 </p>
                 <p>
-                    <code>displayMovies</code>
+                    <code>displayMovies</code> shows the movies that are passed in as a <span>parameter</span> on the
+                    page. This is done by first grabbing the <span>HTML element</span> the cards are to be placed in. A
+                    <span>template tag</span>
+                    is used on the elements of the card so the same structure can be used for each of the cards. This is
+                    used in conjunction with a <span>for loop</span> to modify each <span>element</span> of the
+                    card template for each movie and add it to the element the cards are to be placed in. The most
+                    unique element that was modified is the button where a <span>custom <code>data-movieId</code>
+                        attribute</span>
+                    was set on each of the cards so that the Id of the movie could be accessed when the "More Info"
+                    button is clicked.
                 </p>
                 <p>
-                    <code>displayAllMovies</code>
+                    <code>displayAllMovies</code> uses <code>getMovies</code> to grab the popular movie data from TMBD
+                    and passes that data as an argument of <code>displayMovies</code>.
                 </p>
                 <p>
-                    <code>showMovieDetails</code>
+                    <code>showMovieDetails</code> puts the details of the movie into the <span>modal</span> when the
+                    "More Info" button is clicked. The button that was clicked is a parameter of this function.
+                    Using the <span>custom <code>data-movieId</code> attribute</span> on the button, movieId is passed
+                    as an <span>argument</span> to <code>getMovie</code>.
+                    The elements of the modal are then filled in the with data recieved back from the <span>API</span>
+                    call.
+
                 </p>
                 <p>
-                    <code>displayGenres</code>
+                    <code>displayGenres</code> takes in an <span>array</span> of genres for a specific movie as a
+                    <span>parameter</span>. It then gets the element from the modal that is to hold the genre badges
+                    to display all the genres associated with a particular movie.
                 </p>
                 <p>
-                    <code>filterByGenre</code>
+                    <code>filterByGenre</code> takes in a clicked filter button as a parameter. From that button, the
+                    genreId is grabbed which is then used with the movies returned by <code>getMovies</code>.
+                    Using a <span>for loop</span>, each of the movies are checked to see if they have a genreId which
+                    includes the genreId of the filter button that was clicked. If it does, the movie is placed
+                    in a new array. This array is then passed as an argument to <code>displayMovies</code> so that only
+                    those movie cards are shown on the page.
                 </p>
 
                 <h4>What I learned</h4>
@@ -370,7 +407,8 @@
                     &copy; 2023 Rebecca Copeland
                 </div>
                 <div class="col text-center">
-                    <img src="/img/Rebecca-Copeland-full-logo-white.svg" height="40" />
+                    <a class="nav-link" href="https://rebcop.dev/" target="_blank"><img
+                            src="/img/Rebecca-Copeland-full-logo-white.svg" height="40" /></a>
                 </div>
                 <div class="col text-center text-lg-end">
                     <a href="https://www.linkedin.com/in/rebcop/" target="_blank"><i class="bi bi-linkedin"></i></a>
